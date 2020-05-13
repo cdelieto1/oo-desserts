@@ -11,6 +11,7 @@ class Cupcake:
 
         return f'<Cupcake name="{self.name}" qty={self.qty}>'
 
+
     def __init__ (self, name, flavor, price):
         self.name = name
         self.flavor = flavor
@@ -20,9 +21,11 @@ class Cupcake:
         #add the cupcake's name to the ditc as a key 
         self.cache[name] = self
     
+
     def add_stock(self, amount):
 
         self.qty = self.qty + amount
+
 
     def sell(self, amount):
 
@@ -37,10 +40,23 @@ class Cupcake:
          
         self.qty = self.qty - amount
 
+    @staticmethod
     def scale_recipe(ingredients,amount):
-        for ingredients, qty in ingreidents:
-            return (ingredients, qty * amount)
 
+        list_of_ingredients =[]
+        
+        for ingredients, qty in ingredients:
+            list_of_ingredients.append((ingredients,qty*amount))
+
+        return list_of_ingredients
+
+    @classmethod
+    def get(cls,name):
+        if name not in cls.cache:
+            print("Sorry, that cupcake doesn\'t exist")
+            return
+        else:
+            return cls.cache[name]
 
 class Brownie(Cupcake):
     """The bakery is finally ready to accept delivery orders for their delicious brownies! 
@@ -50,6 +66,7 @@ class Brownie(Cupcake):
     the same as the ones for Cupcake. The difference is that brownies come in one flavor (chocolate).
 
     Add a Brownie class to desserts.py. Hint: inheritance will make this task a lot easier!"""
+
 
 if __name__ == '__main__':
     import doctest
